@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 
-const SearchBar = () => {
+const SearchBar = ({ handleSubmit, handleChange}) => {
 
-    const [searchInput, setSearchInput] = useState('')
+    // const [searchInput, setSearchInput] = useState('')
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(searchInput);
-    }
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     console.log(searchInput);
+    // }
 
     return(
         <form onSubmit={handleSubmit} >
@@ -20,7 +20,7 @@ const SearchBar = () => {
                 id="header-search"
                 placeholder="Search blog posts"
                 name="s" 
-                onChange={(e) => setSearchInput(e.target.value)}
+                onChange={handleChange}
             />
             <button type="submit">Search</button>
         </form>
