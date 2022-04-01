@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchBar from '../../components/searchBar/SearchBar';
 
 
-const query = new URLSearchParams(SearchBar).get('s');
 
-console.log(query)
 
-const HomePage = () => {
+
+const HomePage = () => {   
+    
+    const [searchInput, setSearchInput] = useState('')
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(searchInput);
+    }
+
+    const handleChange =(event) => {
+        setSearchInput(event.target.value)
+    }
+
+
     return (
         <div>
             <h1>this is the home page</h1>
-            <SearchBar />
+            <SearchBar 
+                handleSubmit={handleSubmit}
+                handleChange={handleChange}
+            />
         </div>
     )
 }
