@@ -8,8 +8,6 @@ const ArticleCard = (props) => (
         <h1>{props.data.title}</h1>
         <h2>{props.data.headline}</h2>
 
-        {/* {console.log(props.data.title)} */}
-
     </div>
 )
 

@@ -50,7 +50,7 @@ const HomePage = () => {
             />
             {/* <ArticleList articles={articles} /> */}
             
-            { articles.length === 0 ? console.log("nothing") : <ArticleList articles={articles} /> }
+            { articles.length === 0 ? <div>Enter in search bar to view articles</div> : <ArticleList articles={articles} /> }
         </div>
     )
 }
