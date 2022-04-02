@@ -15,9 +15,6 @@ const ArticleList = (props) => (
                 )
             }
             
-            {/* <h1>Articles</h1>
-            <ArticleCard data={props.articles} />  */}
-            {/* {console.log(props.articles.data[0].id)} */}
 
         </div>
 )
