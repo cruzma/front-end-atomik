@@ -41,7 +41,8 @@ const HomePage = () => {
           .catch((err) => {
             console.error(err);
           });
-
+        
+        
         // fetch(`https://beta.mejorconsalud.com/wp-json/mc/v3/posts?orderby=date&order=desc`)
         //   .then((response) => {
         //       if (
@@ -64,7 +65,6 @@ const HomePage = () => {
       setLoading(false);
       
     }
-
     const handleChange =(event) => {
         setSearchInput(event.target.value)
     }
@@ -87,6 +87,7 @@ const HomePage = () => {
             })
             .then((data) => {
               setArticles(data);
+              
             })
             .catch((err) => {
               console.error(err);
@@ -109,29 +110,37 @@ const HomePage = () => {
     //change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
-    return (
-        <div className='flex min-h-screen flex-col w-full items-center justify-center bg-[#f2f2f2]'>
-            <h1 className='text-5xl font-bold mb-4'>Atomik Frontend Test</h1>
-            <div className='w-full flex justify-center'>
-                <SearchBar 
-                    handleSubmit={handleSubmit}
-                    handleChange={handleChange}
-                />
+    // if(loading === true){
+    //   return (
+    //     <div className='flex flex-col w-full items-center min-h-screen bg-[#f2f2f2]'></div>
+    //   )
+    // } else {
+      return (
+          <div className='flex min-h-screen flex-col w-full items-center justify-center bg-[#f2f2f2]'>
+              <h1 className='text-5xl font-bold mb-4'>Atomik Frontend Test</h1>
+              <div className='w-full flex justify-center'>
+                  <SearchBar 
+                      handleSubmit={handleSubmit}
+                      handleChange={handleChange}
+                  />
 
-                <form onSubmit={orderByRelevance}>
-                  { articles.length !== 0 && <button type='submit' className="m-2 rounded px-4 px-4 py-2 font-semibold bg-gray-500 text-gray-100">Mas Relevantes</button>} 
-                </form>
-             </div>         
-            
+                  <form onSubmit={orderByRelevance}>
+                    { articles.length !== 0 && <button type='submit' className="m-2 rounded px-4 px-4 py-2 font-semibold bg-gray-500 text-gray-100">Mas Relevantes</button>} 
+                  </form>
+              </div>         
+              
 
 
-            { articles.length === 0 ? <div>Ingrese en la barra de búsqueda para ver artículos</div> : <div>encontrado un total de {articles.data.length} artículos</div> }
-            { articles.length !== 0 && <ArticleList articles={getCurrentArticles()} loading={loading}/> }
-            { articles.length !== 0 && <Pagination articlesPerPage={articlesPerPage} totalArticles={articles.data.length} paginate={paginate}></Pagination> }
+              { articles.length === 0 ? <div>Ingrese en la barra de búsqueda para ver artículos</div> : <div>encontrado un total de {articles.data.length} artículos</div> }
+              { articles.length !== 0 && <ArticleList articles={getCurrentArticles()} loading={loading}/> }
+              { articles.length !== 0 && <Pagination articlesPerPage={articlesPerPage} totalArticles={articles.data.length} paginate={paginate}></Pagination> }
+              
+          </div>
+      )
 
-            
-        </div>
-    )
+    // }
+
+
 }
 
 export default HomePage;
