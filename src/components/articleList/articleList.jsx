@@ -5,11 +5,16 @@ import ArticleCard from '../articleCard/articleCard';
 
 
 
-const ArticleList = (props) => (
-        <div>
+const ArticleList = ({articles, loading}) => {
+
+    if(loading){
+        return <h2>loading...</h2>
+    }
+    return(
+        <div className='flex flex-wrap justify-center items-center'>
             
             {
-                props.articles.data.map((article) =>
+                articles.map((article) =>
                     <ArticleCard key={article.id} data={article} /> 
                    
                 )
@@ -17,6 +22,10 @@ const ArticleList = (props) => (
             
 
         </div>
-)
+    )
+
+}
+
+
 
 export default ArticleList;

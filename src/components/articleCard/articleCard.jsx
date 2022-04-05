@@ -16,13 +16,12 @@ const ArticleCard = (props) => {
     }
     return(
         
-    <div className='p-16 bg-emerald-500 m-5'>
-    
-        <a href={props.data.title} onClick={routeChange}>
-            <h1>{props.data.title}</h1>
-            <h2>{props.data.headline}</h2>
-            
-        </a>
+    <div className='m-5 rounded-lg cursor-pointer w-80 h-[32rem] hover:shadow-inner' onClick={routeChange}>
+        <img src={props.data.featured_media.medium} className="rounded-t-lg h-3/5 w-full"/>
+        <div className='bg-white text-center rounded-b-lg h-2/5'>
+            <h1 className='text-[#8b8f98] text-xl font-bold pt-6'>{props.data.title}</h1>
+            <h2 className='text-[#acb3be] text-sm font-light pt-6 px-1'>{props.data.excerpt}</h2>
+        </div>     
     </div>
 
     )

@@ -34,13 +34,19 @@ const ArticlePage = () => {
     }, [])
  
 
+
+
     return (
-        <div className='flex flex-col w-full items-center'>
-            <div className='bg-emerald-600 w-10/12'>
+        <div className='flex flex-col w-full items-center min-h-screen bg-[#f2f2f2]'>
+            <div className='w-10/12'>
               <div className='w-full text-center'>
                 <h1 className='text-5xl font-bold pb-9'>{articleData.title}</h1>
+                <p>{articleData.published}</p>
+                <p>{articleData.metas['article:author']}</p>
+                <p>{articleData.metas['article:section']}</p>
+                {console.log(articleData.metas['article:author'])}
               </div>
-              <div dangerouslySetInnerHTML={{__html: articleData.content}}></div>
+              <div dangerouslySetInnerHTML={{__html: articleData.content}} className="text-lg"></div>
             </div>
         </div>
     )
