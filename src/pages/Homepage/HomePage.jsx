@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import SearchBar from '../../components/searchBar/SearchBar';
 import ArticleList  from '../../components/articleList/articleList';
+import Pagination from '../../components/pagenation/pagenation';
 
 
 const HomePage = () => {   
-    
+
     const [searchInput, setSearchInput] = useState('')
     const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1)
+    const [articlesPerPage] = useState(4)
+
+    
 
     let searchString = JSON.stringify(searchInput)
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        setLoading(true);
 
         fetch(`https://beta.mejorconsalud.com/wp-json/mc/v3/posts?search=${searchString}`)
         .then((response) => {
@@ -54,7 +61,7 @@ const HomePage = () => {
         //     .catch((err) => {
         //       console.error(err);
         //     });
-      
+      setLoading(false);
       
     }
 
@@ -62,7 +69,9 @@ const HomePage = () => {
         setSearchInput(event.target.value)
     }
 
-    const orderByRelevance = () => {
+    const orderByRelevance = (event) => {
+        event.preventDefault();
+
         fetch(`https://beta.mejorconsalud.com/wp-json/mc/v3/posts?search=${searchString}&page=1&orderby=relevance`)
           .then((response) => {
               if (
@@ -84,17 +93,43 @@ const HomePage = () => {
             });
     }
 
+    //get current article
+    const indexOfLastArticle = currentPage * articlesPerPage
+    const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
+    
+    const getCurrentArticles = () => {
+      if(articles.length === 0){
+        return []
+      } else {
+        return articles.data.slice(indexOfFirstArticle, indexOfLastArticle);
+      }
+    }
+
+
+    //change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
     return (
-        <div className='flex flex-col items-center'>
-            <h1 className='text-5xl font-bold'>this is the home page</h1>
-            <SearchBar 
-                handleSubmit={handleSubmit}
-                handleChange={handleChange}
-            />
+        <div className='flex min-h-screen flex-col w-full items-center justify-center bg-[#f2f2f2]'>
+            <h1 className='text-5xl font-bold mb-4'>Atomik Frontend Test</h1>
+            <div className='w-full flex justify-center'>
+                <SearchBar 
+                    handleSubmit={handleSubmit}
+                    handleChange={handleChange}
+                />
+
+                <form onSubmit={orderByRelevance}>
+                  { articles.length !== 0 && <button type='submit' className="m-2 rounded px-4 px-4 py-2 font-semibold bg-gray-500 text-gray-100">Mas Relevantes</button>} 
+                </form>
+             </div>         
             
-            { articles.length === 0 ? <div>Enter in search bar to view articles</div> : <button onClick={orderByRelevance}>Mas Relevantes</button>}
-            { articles.length !== 0 && <div>{articles.data.length}</div>}
-            { articles.length !== 0 && <ArticleList articles={articles} /> }
+
+
+            { articles.length === 0 ? <div>Ingrese en la barra de búsqueda para ver artículos</div> : <div>encontrado un total de {articles.data.length} artículos</div> }
+            { articles.length !== 0 && <ArticleList articles={getCurrentArticles()} loading={loading}/> }
+            { articles.length !== 0 && <Pagination articlesPerPage={articlesPerPage} totalArticles={articles.data.length} paginate={paginate}></Pagination> }
+
+            
         </div>
     )
 }
