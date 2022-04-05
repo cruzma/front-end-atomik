@@ -50,7 +50,7 @@ const ArticlePage = () => {
                 <h1 className="text-5xl">Atomik Frontend Test</h1>
                 <h2 className='text-4xl font-bold pb-9'>{articleData.title}</h2>
                 <p>{articleData.published}</p>
-                {/* <p>{authorName}</p>
+                {/* <p>{{articleData.metas['article:author']}}</p>
                 <p>{category}</p> */}
               </div>
               <div dangerouslySetInnerHTML={{__html: articleData.content}} className="text-lg flex flex-col leading-9"></div>
