@@ -1,0 +1,44 @@
+h2{
+    font-size: 1.875rem !important;
+    line-height: 2.25rem !important;
+    margin-top: 2rem !important;
+    margin-bottom: .5rem !important;
+}
+
+h3{
+    font-size: 1.5rem !important; 
+    line-height: 2rem !important; /* 32px */
+    margin-top: 2rem !important;
+    margin-bottom: .5rem !important;
+}
+
+figure{
+    width: 100%;
+    
+}
+
+figcaption{
+    background-color: #ffffff;
+    margin-bottom: 1rem;
+    border-bottom-left-radius: 0.5rem; /* 8px */
+    border-bottom-right-radius: 0.5rem; /* 8px */
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+img{
+    width: 100%;
+    object-fit: cover;
+    margin-top: 1rem;
+    border-top-left-radius: 0.5rem; /* 8px */
+    border-top-right-radius: 0.5rem; /* 8px */
+}
+
+a{
+    color: blue !important;
+    font-weight: bold;
+}
+
+a:hover{
+    color: rgba(0, 0, 255, 0.774) !important;
+}
